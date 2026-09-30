@@ -4,12 +4,11 @@ kind: Kustomization
 namespace: rhokp-server
 
 resources:
-  - namespace.yaml
+  - okp-mcp-namespace.yaml
   # RHOKP Solr server
   - rhokp-serviceaccount.yaml
   - rhokp-deployment.yaml
   - rhokp-service.yaml
-  - rhokp-route.yaml
 
 labels:
   - pairs:
