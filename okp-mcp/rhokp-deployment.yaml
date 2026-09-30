@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rhokp-server
+  labels:
+    app: rhokp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rhokp
+  template:
+    metadata:
+      labels:
+        app: rhokp
+    spec:
+      serviceAccountName: rhokp-server
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: rhokp
+          image: registry.redhat.io/offline-knowledge-portal/rhokp-rhel9:latest
+          env:
+            - name: SOLR_JETTY_HOST
+              value: "0.0.0.0"
+            - name: ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: access-credentials
+                  key: access-key
+          ports:
+            - name: http
+              containerPort: 8080
+            - name: https
+              containerPort: 8443
+            - name: solr
+              containerPort: 8983
+          resources:
+            requests:
+              cpu: 500m
+              memory: 2Gi
+            limits:
+              cpu: "2"
+              memory: 4Gi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL

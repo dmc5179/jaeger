@@ -1,0 +1,17 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: rhokp-server
+  labels:
+    app: rhokp
+spec:
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: rhokp-server
+    weight: 100
+  wildcardPolicy: None
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect

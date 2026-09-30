@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: rhokp-mcp
+  labels:
+    app: rhokp-mcp
+spec:
+  port:
+    targetPort: 8000
+  to:
+    kind: Service
+    name: rhokp-mcp
+    weight: 100
+  wildcardPolicy: None

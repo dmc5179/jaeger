@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rhokp-mcp-server
+  labels:
+    app: rhokp-mcp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rhokp-mcp
+  template:
+    metadata:
+      labels:
+        app: rhokp-mcp
+    spec:
+      serviceAccountName: rhokp-mcp-server
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: rhokp-mcp
+      containers:
+        - name: rhokp-mcp
+          image: quay.io/redhat-user-workloads/rhel-lightspeed-tenant/rhel-knowledge-bridge:latest
+          env:
+            - name: MCP_TRANSPORT
+              value: streamable-http
+            - name: MCP_SOLR_URL
+              value: "http://rhokp-server.rhokp-server.svc.cluster.local:8983"
+            - name: MCP_LOG_LEVEL
+              value: "INFO"
+          ports:
+            - name: mcp
+              containerPort: 8000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL

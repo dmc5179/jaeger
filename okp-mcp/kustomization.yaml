@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: rhokp-server
+
+resources:
+  - namespace.yaml
+  # RHOKP Solr server
+  - rhokp-serviceaccount.yaml
+  - rhokp-deployment.yaml
+  - rhokp-service.yaml
+  - rhokp-route.yaml
+
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: rhokp
+    includeSelectors: false
+
+# Secret must be provisioned out-of-band (ExternalSecrets, SealedSecrets, or
+# Vault). See rhokp-deployment.yaml for the expected secret name and key.
