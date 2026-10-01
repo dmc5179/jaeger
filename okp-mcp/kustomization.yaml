@@ -9,6 +9,12 @@ resources:
   - rhokp-serviceaccount.yaml
   - rhokp-deployment.yaml
   - rhokp-service.yaml
+  - rhokp-route.yaml
+  # OKP MCP server
+  - mcp-serviceaccount.yaml
+  - mcp-deployment.yaml
+  - mcp-service.yaml
+  - mcp-route.yaml
 
 labels:
   - pairs:
