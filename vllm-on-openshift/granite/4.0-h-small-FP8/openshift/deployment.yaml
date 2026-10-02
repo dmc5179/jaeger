@@ -24,6 +24,18 @@ spec:
       containers:
         - name: vllm
           image: quay.io/danclark/granite-4.0-h-small-fp8-offline:latest
+          args:
+            - /models/granite-4.0-h-small-FP8-dynamic
+            - --host
+            - "0.0.0.0"
+            - --port
+            - "8000"
+            - --served-model-name
+            - granite-4.0-h-small-fp8
+            - --gpu-memory-utilization
+            - "0.90"
+            - --max-model-len
+            - "8192"
           ports:
             - containerPort: 8000
               protocol: TCP
