@@ -1,0 +1,4 @@
+# Consumed by the ApplicationSet git files generator.
+name: kernel-module-management
+syncWave: "0"
+description: Kernel Module Management (KMM) operator.

@@ -1,0 +1,5 @@
+# Gated in the Helm chart on `kueue != Removed`; kueue is Unmanaged by default,
+# so this app is enabled. Move this directory out of apps/kubic to disable it.
+name: kueue-operator
+syncWave: "0"
+description: Red Hat build of Kueue (RHBOK) operator.

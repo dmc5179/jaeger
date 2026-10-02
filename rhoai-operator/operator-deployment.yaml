@@ -1,0 +1,11 @@
+# Partial Deployment, applied server-side to pin the operator replica count.
+# The operator's own CSV owns the rest of the spec.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rhods-operator
+  namespace: redhat-ods-operator
+  annotations:
+    argocd.argoproj.io/sync-wave: "32"
+spec:
+  replicas: 1

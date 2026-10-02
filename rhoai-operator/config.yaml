@@ -1,0 +1,4 @@
+# Wave 30: RHOAI lands last, after GPU and the scaling/observability operators.
+name: rhoai-operator
+syncWave: "30"
+description: Red Hat OpenShift AI operator, DataScienceCluster and dashboard config.

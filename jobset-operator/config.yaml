@@ -1,0 +1,5 @@
+# Gated in the Helm chart on `trainer != Removed`; trainer is Managed by default,
+# so this app is enabled. Move this directory out of apps/kubic to disable it.
+name: jobset-operator
+syncWave: "0"
+description: JobSet operator and the cluster JobSetOperator CR.

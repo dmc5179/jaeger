@@ -1,0 +1,10 @@
+# Partial Deployment, applied server-side to pin the dashboard replica count.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rhods-dashboard
+  namespace: redhat-ods-applications
+  annotations:
+    argocd.argoproj.io/sync-wave: "35"
+spec:
+  replicas: 1

@@ -1,0 +1,3 @@
+name: tempo-operator
+syncWave: "0"
+description: Tempo Operator (distributed tracing backend).

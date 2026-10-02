@@ -1,0 +1,5 @@
+# Wave 10: the GPU stack lands after the wave-0 infrastructure apps.
+# NFD must be installed before the NVIDIA GPU Operator ClusterPolicy is useful.
+name: node-feature-discovery
+syncWave: "10"
+description: Node Feature Discovery operator and the cluster NodeFeatureDiscovery instance.

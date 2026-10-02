@@ -1,0 +1,11 @@
+apiVersion: operators.coreos.com/v1alpha2
+kind: OperatorGroup
+metadata:
+  name: openshift-jobset-operator-group
+  namespace: openshift-jobset-operator
+  annotations:
+    olm.providedAPIs: JobSetOperator.v1.operator.openshift.io
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  targetNamespaces:
+    - openshift-jobset-operator

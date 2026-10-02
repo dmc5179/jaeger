@@ -1,0 +1,3 @@
+name: custom-metrics-autoscaler
+syncWave: "0"
+description: OpenShift Custom Metrics Autoscaler (KEDA) operator and its KedaController.

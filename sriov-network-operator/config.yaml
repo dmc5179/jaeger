@@ -1,0 +1,4 @@
+# Wave 11: after NFD, before the NVIDIA GPU Operator.
+name: sriov-network-operator
+syncWave: "11"
+description: SR-IOV Network Operator and the default SriovOperatorConfig.

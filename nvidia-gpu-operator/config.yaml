@@ -1,0 +1,4 @@
+# Wave 12: after NFD and SR-IOV.
+name: nvidia-gpu-operator
+syncWave: "12"
+description: NVIDIA GPU Operator and the gpu-cluster-policy ClusterPolicy.
