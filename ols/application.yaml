@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openshift-lightspeed
+  namespace: openshift-gitops
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/dmc5179/jaeger.git'
+    targetRevision: HEAD
+    path: ols
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: openshift-lightspeed
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+    # The OLSConfig CRD only exists once the Lightspeed operator is installed
+    # (namespace/operatorgroup/subscription are managed separately), so retry
+    # until the operator lands.
+    retry:
+      limit: 10
+      backoff:
+        duration: 30s
+        factor: 2
+        maxDuration: 5m

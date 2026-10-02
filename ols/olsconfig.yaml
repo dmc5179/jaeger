@@ -1,0 +1,38 @@
+apiVersion: ols.openshift.io/v1alpha1
+kind: OLSConfig
+metadata:
+  name: cluster
+spec:
+  featureGates:
+    - MCPServer
+  mcpServers:   # New Format 1.0.10
+    - name: rhokp-mcp
+      url: 'http://rhokp-mcp.rhokp-server.svc.cluster.local:8000/mcp'
+      timeout: 30
+  llm:
+    providers:
+      - credentialsSecretRef:
+          name: credentials
+        models:
+          - name: granite-4.0-h-small-fp8
+        name: vllm-granite
+        type: openai
+        url: 'http://granite-4.0-h-small-fp8.granite-inference.svc.cluster.local:8000/v1'
+  ols:
+    conversationCache:
+      postgres:
+        credentialsSecret: lightspeed-redis-secret
+        dbName: postgres
+        maxConnections: 2000
+        sharedBuffers: 256MB
+        user: postgres
+      type: postgres
+    defaultModel: granite-4.0-h-small-fp8
+    defaultProvider: vllm-granite
+    deployment:
+      console:
+        replicas: 1
+      replicas: 1
+    logLevel: INFO
+  olsDataCollector:
+    logLevel: INFO
